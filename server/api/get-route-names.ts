@@ -6,13 +6,17 @@ export default defineEventHandler(async () => {
   const pathToPages = path.join(process.cwd(), "/pages/")
 
   pages = fs.readdirSync(pathToPages)
-  const names = pages.map((elem) => {
+  const names: { friendlyName: string; page: string }[] = []
+  pages.map((elem) => {
     if (elem == "index.vue") {
-      return "/"
+      names.push({ page: "/", friendlyName: path.parse(elem).name })
     } else {
-      return path.parse(elem).name
+      names.push({
+        friendlyName: path.parse(elem).name.replaceAll("-", " "),
+        page: `/${path.parse(elem).name}`,
+      })
     }
   })
 
-  return names.sort()
+  return names
 })

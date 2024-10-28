@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const currentRoute = useRoute()
-const routes: Ref<string[]> = ref([])
+const routes: Ref<{ friendlyName: string; page: string }[]> = ref([])
 
 useHead({
   title: `Component Library - ${String(currentRoute.name)}`,
@@ -24,15 +24,15 @@ useFetch("/api/get-route-names")
     <nav class="flex-col min-h-full min-w-40">
       <NuxtLink
         v-for="route in routes"
-        :to="route"
+        :to="route.page"
         class="block capitalize text-slate-400 text-center border-x border-slate-800 transition hover:text-white hover:border-white"
         :class="{
           active:
-            route == currentRoute.name ||
-            (route == '/' && currentRoute.name == 'index'),
+            route.page == currentRoute.name ||
+            (route.page == '/' && currentRoute.name == 'index'),
         }"
       >
-        {{ route == "/" ? "Index" : route }}
+        {{ route.friendlyName }}
       </NuxtLink>
     </nav>
     <hr class="block md:hidden border-slate-800" />

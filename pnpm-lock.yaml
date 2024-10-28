@@ -11,6 +11,9 @@ importers:
       gsap:
         specifier: ^3.12.5
         version: 3.12.5
+      kute.js:
+        specifier: ^2.2.4
+        version: 2.2.4
       nuxt:
         specifier: ^3.13.2
         version: 3.13.2(@parcel/watcher@2.4.1)(@types/node@22.7.8)(ioredis@5.4.1)(magicast@0.3.5)(rollup@4.24.0)(terser@5.36.0)(vite@5.4.9(@types/node@22.7.8)(terser@5.36.0))
@@ -980,6 +983,12 @@ packages:
     resolution: {integrity: sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==}
     engines: {node: '>=18'}
 
+  '@thednp/bezier-easing@1.0.7':
+    resolution: {integrity: sha512-A/M4ijFjRu8bTSbCqhQs7xsFA20hbtlEenER7rK3j8OgS7jk9MdN51P4uhCHXUDoTTWjCH49/6wvP4CaRKyKHQ==}
+
+  '@thednp/shorty@1.0.3':
+    resolution: {integrity: sha512-PPaERUGmRpi2eWxYUV5yv/pvalPgPOjwKRmRqGMWGuV8xgkvxgtjKIiFJA2D2ei4l4Ih9mEBktDg6Z9+y+To9Q==}
+
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
     engines: {node: '>=10.13.0'}
@@ -1628,6 +1637,10 @@ packages:
     resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
     engines: {node: '>= 4'}
 
+  dommatrix@1.0.3:
+    resolution: {integrity: sha512-l32Xp/TLgWb8ReqbVJAFIvXmY7go4nTxxlWiAFyhoQw9RKEOHBZNnyGvJWqDVSPmq3Y9HlM4npqF/T6VMOXhww==}
+    deprecated: dommatrix is no longer maintained. Please use @thednp/dommatrix.
+
   domutils@3.1.0:
     resolution: {integrity: sha512-H78uMmQtI2AhgDJjWeQmHwJJ2bLPD3GMmO7Zja/ZZh84wkm+4ut+IUnUdRa8uCGX88DiVx1j6FRe1XfxEgjEZA==}
 
@@ -2153,6 +2166,9 @@ packages:
   kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
 
+  kute.js@2.2.4:
+    resolution: {integrity: sha512-M63qfJplLT/1+qeRdFtHimC0D4fqUyRqHJcsnWWTY9s+isB6TsNNx/oSR2XzMm4CsY9Rvqurd+xUYSyJggmhbQ==}
+
   launch-editor@2.9.1:
     resolution: {integrity: sha512-Gcnl4Bd+hRO9P9icCP/RVVT2o8SFlPXofuCxvA2SaZuH45whSvf5p8x5oih5ftLiVhEI4sp5xDY+R+b3zJBh5w==}
 
@@ -2265,6 +2281,9 @@ packages:
   mimic-fn@4.0.0:
     resolution: {integrity: sha512-vqiC06CuhBTUdZH+RYl8sFrL096vA45Ok5ISO6sE/Mr1jRbGH4Csnhi8f3wKVl7x8mO4Au7Ir9D3Oyv1VYMFJw==}
     engines: {node: '>=12'}
+
+  minifill@0.0.17:
+    resolution: {integrity: sha512-tV56LFXsi8vjH4tUExtlu8aPKKQw/U/mn4OIrDU9x30H+9sP8/dWFbXzkAPmcH6o+9fho98kyafnk4VgQViYQQ==}
 
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
@@ -3055,6 +3074,9 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  svg-path-commander@1.0.5:
+    resolution: {integrity: sha512-hhQfARVXoPrwwe4DNPWM4hjQLK7rTxwQ+TUc5mxoe5g0k5eStc4SPnKqmivlm/dzZ98bI+yDyKye92n2t+oOiQ==}
 
   svg-tags@1.0.0:
     resolution: {integrity: sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==}
@@ -4431,6 +4453,10 @@ snapshots:
 
   '@sindresorhus/merge-streams@2.3.0': {}
 
+  '@thednp/bezier-easing@1.0.7': {}
+
+  '@thednp/shorty@1.0.3': {}
+
   '@trysound/sax@0.2.0': {}
 
   '@types/estree@1.0.6': {}
@@ -5115,6 +5141,8 @@ snapshots:
     dependencies:
       domelementtype: 2.3.0
 
+  dommatrix@1.0.3: {}
+
   domutils@3.1.0:
     dependencies:
       dom-serializer: 2.0.0
@@ -5729,6 +5757,13 @@ snapshots:
 
   kolorist@1.8.0: {}
 
+  kute.js@2.2.4:
+    dependencies:
+      '@thednp/bezier-easing': 1.0.7
+      '@thednp/shorty': 1.0.3
+      minifill: 0.0.17
+      svg-path-commander: 1.0.5
+
   launch-editor@2.9.1:
     dependencies:
       picocolors: 1.1.1
@@ -5836,6 +5871,8 @@ snapshots:
   mime@4.0.4: {}
 
   mimic-fn@4.0.0: {}
+
+  minifill@0.0.17: {}
 
   minimatch@3.1.2:
     dependencies:
@@ -6781,6 +6818,10 @@ snapshots:
   supports-color@9.4.0: {}
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  svg-path-commander@1.0.5:
+    dependencies:
+      dommatrix: 1.0.3
 
   svg-tags@1.0.0: {}
 
