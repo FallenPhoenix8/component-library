@@ -3,7 +3,7 @@ import kute from "kute.js"
 
 const props = defineProps({
   success: { type: Boolean, default: undefined },
-  isLoading: { type: Boolean, default: false },
+  // isLoading: { type: Boolean, default: false },
   ringColor: { type: String, default: "inherit" },
   checkColor: { type: String, default: "inherit" },
   primaryColor: { type: String, default: undefined },
@@ -28,22 +28,6 @@ function sleep(delay: number) {
   })
 }
 
-function animateCircle(circle: SVGCircleElement, loadingCircleTime: number) {
-  const animateCircle = kute.fromTo(
-    circle,
-    {
-      opacity: 1,
-    },
-    {
-      opacity: 0.5,
-    },
-    {
-      duration: loadingCircleTime,
-    }
-  )
-  animateCircle.start()
-}
-
 // Grabbing checkmark element references
 const checkMarkSVG = ref<SVGSVGElement | null>(null)
 const pathRingSuccess = ref<SVGPathElement | null>(null)
@@ -62,7 +46,7 @@ const pathRingError = ref<SVGPathElement | null>(null)
 const pathError1 = ref<SVGPathElement | null>(null)
 const pathError2 = ref<SVGPathElement | null>(null)
 
-const emit = defineEmits(["submit"])
+const emit = defineEmits(["submit-form"])
 
 onMounted(() => {
   // Saving values in variables
@@ -166,7 +150,7 @@ const animateErrorX = async () => {
   drawX2.start()
 }
 
-const animateLoading = async () => {
+const animateLoading = () => {
   // Saving values in variables
   const circle1 = loadingCircle1.value!
   const circle2 = loadingCircle2.value!
@@ -176,16 +160,6 @@ const animateLoading = async () => {
   circle1.style.setProperty("--order", String(1))
   circle2.style.setProperty("--order", String(2))
   circle3.style.setProperty("--order", String(3))
-
-  // Animation
-  // while (isAnimating) {
-  //   animateCircle(circle1, loadingCircleTime)
-  //   await sleep(loadingCircleTime)
-  //   animateCircle(circle2, loadingCircleTime)
-  //   await sleep(loadingCircleTime)
-  //   animateCircle(circle3, loadingCircleTime)
-  //   await sleep(loadingCircleTime)
-  // }
 }
 
 watch(state, () => {
@@ -199,13 +173,27 @@ watch(state, () => {
     animateErrorX()
   }
 })
+
+watch(
+  () => props.success,
+  () => {
+    if (props.success === true) {
+      state.value = ButtonState.SUCCESS
+    } else if (props.success === false) {
+      state.value = ButtonState.ERROR
+      setTimeout(() => {
+        state.value = ButtonState.IDLE
+      }, 2000)
+    }
+  }
+)
 </script>
 <template>
   <button
     @click.prevent="
       () => {
-        emit('submit')
-        state = ButtonState.ERROR
+        emit('submit-form')
+        state = ButtonState.LOADING
       }
     "
     class="btn"
@@ -221,14 +209,23 @@ watch(state, () => {
       }
     "
   >
-    <span :class="{ textModifierClasses, hidden: state !== ButtonState.IDLE }"
+    <span
+      :class="{
+        textModifierClasses,
+        '-translate-x-96 absolute': state !== ButtonState.IDLE,
+        'translate-x-0': state === ButtonState.IDLE,
+      }"
       >Submit</span
     >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 200 200"
       ref="checkMarkSVG"
-      :class="state === ButtonState.SUCCESS ? 'block' : 'hidden'"
+      class="check-mark-svg"
+      :class="{
+        'translate-x-0': state === ButtonState.SUCCESS,
+        'translate-x-96 absolute': state !== ButtonState.SUCCESS,
+      }"
     >
       <path
         d="
@@ -273,7 +270,11 @@ watch(state, () => {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 200 200"
       ref="errorSVG"
-      :class="state === ButtonState.ERROR ? 'block' : 'hidden'"
+      class="error-x-svg"
+      :class="{
+        'translate-x-0': state === ButtonState.ERROR,
+        'translate-x-96 absolute': state !== ButtonState.ERROR,
+      }"
     >
       <path
         d="
@@ -317,7 +318,10 @@ watch(state, () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 200 40"
-      :class="state === ButtonState.LOADING ? 'block' : 'hidden'"
+      :class="{
+        'translate-y-0': state === ButtonState.LOADING,
+        '-translate-y-96 absolute': state !== ButtonState.LOADING,
+      }"
       ref="loadingSVG"
       class="loading-circles"
     >
@@ -366,7 +370,12 @@ svg {
 }
 
 .btn {
-  @apply flex h-10 justify-center items-center overflow-hidden rounded-lg;
+  @apply relative flex h-10 justify-center items-center overflow-hidden rounded-lg;
+}
+
+.btn:hover,
+.btn:focus {
+  @apply outline-current shadow-sm -translate-y-1 px-2;
 }
 
 .btn,
@@ -397,5 +406,9 @@ svg {
 
 .loading-circles {
   @apply max-w-20;
+}
+
+svg {
+  height: 100%;
 }
 </style>
