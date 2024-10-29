@@ -36,7 +36,10 @@ useFetch("/api/get-route-names")
       </NuxtLink>
     </nav>
     <hr class="block md:hidden border-slate-800" />
-    <article class="flex flex-1 justify-center items-center">
+    <article class="flex-1">
+      <header class="block capitalize text-center text-3xl py-3">
+        {{ currentRoute.name!.toString().replaceAll("-", " ") }}
+      </header>
       <slot />
     </article>
   </main>
